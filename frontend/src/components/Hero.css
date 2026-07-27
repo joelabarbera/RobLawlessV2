@@ -1,0 +1,192 @@
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  padding: 100px 56px 90px;
+  background: #12151a;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.hero-left {
+  flex: 1;
+  max-width: 620px;
+  text-align: left;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(232,185,63,0.1);
+  border: 1px solid rgba(232,185,63,0.3);
+  padding: 7px 14px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+}
+
+.hero-badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #e8b93f;
+}
+
+.hero-badge span {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #e8b93f;
+  letter-spacing: 0.6px;
+}
+
+.hero-left h1 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 58px;
+  line-height: 1.08;
+  margin: 0 0 22px;
+  color: #f5f3ef;
+  letter-spacing: -0.5px;
+}
+
+.hero-left > p {
+  font-size: 17px;
+  line-height: 1.7;
+  color: #a8a5a0;
+  margin: 0 0 36px;
+  max-width: 480px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 56px;
+}
+
+.btn-gold {
+  background: #e8b93f;
+  color: #12151a;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 16px 32px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(232,185,63,0.25);
+  text-decoration: none;
+}
+
+.btn-gold:hover {
+  background: #f3cc6a;
+}
+
+.hero-buttons a.btn-text {
+  color: #e8e6e1;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 16px 8px;
+  border-bottom: 1px solid rgba(232,185,63,0.4);
+  text-decoration: none;
+}
+
+.hero-buttons a.btn-text:hover {
+  color: #f3cc6a;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 40px;
+}
+
+.hero-stats h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #e8b93f;
+  margin: 0 0 4px;
+}
+
+.hero-stats p {
+  color: #8a8782;
+  font-size: 13px;
+  margin: 0;
+}
+
+.hero-right {
+  flex: 1;
+  max-width: 480px;
+}
+
+.hero-photo {
+  aspect-ratio: 4/5;
+  border-radius: 16px;
+  background: repeating-linear-gradient(135deg, #1a1e26, #1a1e26 12px, #20242c 12px, #20242c 24px);
+  border: 1px solid rgba(232,185,63,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.photo-label {
+  font-family: ui-monospace, monospace;
+  font-size: 12.5px;
+  color: #5c5952;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.coach-card {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  background: rgba(18,21,26,0.85);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(232,185,63,0.25);
+  border-radius: 10px;
+  padding: 16px 18px;
+  text-align: left;
+}
+
+.coach-card h4 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #f5f3ef;
+  margin: 0 0 2px;
+}
+
+.coach-card p {
+  font-size: 13px;
+  color: #a8a5a0;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    padding: 48px 20px;
+    gap: 32px;
+  }
+
+  .hero-left {
+    max-width: 100%;
+  }
+
+  .hero-left h1 {
+    font-size: 38px;
+  }
+
+  .hero-right {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .hero-stats {
+    gap: 24px;
+  }
+}

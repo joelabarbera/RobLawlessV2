@@ -1,0 +1,85 @@
+.how-it-works {
+  padding: 80px 56px;
+  max-width: 1400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hiw-header {
+  max-width: 600px;
+  margin: 0 auto 56px;
+}
+
+.hiw-label {
+  display: inline-block;
+  color: #e8b93f;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.hiw-header h2 {
+  font-family: 'Oswald', sans-serif;
+  color: #f5f3ef;
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.hiw-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.hiw-step {
+  text-align: center;
+}
+
+.hiw-number {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(232,185,63,0.12);
+  border: 1px solid rgba(232,185,63,0.3);
+  color: #e8b93f;
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.hiw-step h3 {
+  font-family: 'Oswald', sans-serif;
+  color: #f5f3ef;
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.hiw-step p {
+  color: #8a8782;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .how-it-works {
+    padding: 48px 20px;
+  }
+
+  .hiw-header h2 {
+    font-size: 28px;
+  }
+
+  .hiw-steps {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
