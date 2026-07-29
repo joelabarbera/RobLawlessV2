@@ -4,3 +4,12 @@ dist/
 .DS_Store
 *.env
 .env.local
+
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Google Calendar API credentials
+backend/credentials.json
+backend/token.json

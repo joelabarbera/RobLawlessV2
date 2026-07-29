@@ -22,7 +22,7 @@ function About(){
 
                 {/* Description */}
                 <p>
-                    With over 15 years on the lanes and a USBC coaching certification,
+                    With over 25 years on the lanes and a USBC coaching certification,
                     I work with bowlers of every level — from first-timers learning
                     their approach to league veterans refining their release. Every
                     lesson is video-reviewed and tailored to your goals.

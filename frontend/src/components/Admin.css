@@ -1,0 +1,275 @@
+/* LOGIN */
+.admin-login {
+  min-height: 100vh;
+  background: #12151a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.admin-login-card {
+  background: #1a1e26;
+  border: 1px solid rgba(232,185,63,0.15);
+  border-radius: 18px;
+  padding: 48px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.admin-login-card h2 {
+  font-family: 'Oswald', sans-serif;
+  color: #f5f3ef;
+  font-size: 28px;
+  margin: 8px 0 28px;
+}
+
+.admin-label {
+  display: inline-block;
+  color: #e8b93f;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.admin-error {
+  color: #e05252;
+  font-size: 13px;
+  margin: -4px 0 12px;
+}
+
+/* SHARED INPUTS */
+.admin-input {
+  background: #12151a;
+  border: 1px solid rgba(232,185,63,0.15);
+  border-radius: 8px;
+  color: #f5f3ef;
+  font-family: 'Manrope', sans-serif;
+  font-size: 15px;
+  padding: 12px 16px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+  color-scheme: dark;
+}
+
+.admin-input:focus {
+  border-color: #e8b93f;
+}
+
+.admin-btn {
+  display: block;
+  width: 100%;
+  background: #e8b93f;
+  color: #12151a;
+  font-family: 'Manrope', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.admin-btn:hover {
+  background: #f3cc6a;
+}
+
+/* PAGE */
+.admin-page {
+  min-height: 100vh;
+  background: #12151a;
+  padding: 48px;
+}
+
+.admin-header {
+  max-width: 940px;
+  margin: 0 auto 40px;
+}
+
+.admin-header h1 {
+  font-family: 'Oswald', sans-serif;
+  color: #f5f3ef;
+  font-size: 36px;
+  font-weight: 700;
+  margin: 8px 0 0;
+}
+
+.admin-content {
+  max-width: 940px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.admin-card {
+  background: #1a1e26;
+  border: 1px solid rgba(232,185,63,0.15);
+  border-radius: 18px;
+  padding: 36px;
+}
+
+.admin-card h3 {
+  font-family: 'Oswald', sans-serif;
+  color: #f5f3ef;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 24px;
+}
+
+/* MODE TOGGLE */
+.mode-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.mode-btn {
+  flex: 1;
+  background: #12151a;
+  border: 1px solid rgba(232,185,63,0.15);
+  border-radius: 8px;
+  color: #8a8782;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.mode-btn.active {
+  background: rgba(232,185,63,0.12);
+  border-color: #e8b93f;
+  color: #e8b93f;
+}
+
+/* FORM */
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.form-label {
+  color: #8a8782;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+/* DAY CHECKBOXES */
+.day-checkboxes {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.day-check {
+  background: #12151a;
+  border: 1px solid rgba(232,185,63,0.15);
+  border-radius: 8px;
+  color: #8a8782;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.day-check input {
+  display: none;
+}
+
+.day-check.checked {
+  background: rgba(232,185,63,0.12);
+  border-color: #e8b93f;
+  color: #e8b93f;
+}
+
+/* SCHEDULE LIST */
+.admin-empty {
+  color: #4a4844;
+  font-size: 14px;
+  margin: 0;
+}
+
+.schedule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.schedule-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #12151a;
+  border: 1px solid rgba(232,185,63,0.1);
+  border-radius: 10px;
+  padding: 16px;
+  gap: 12px;
+}
+
+.schedule-title {
+  color: #f5f3ef;
+  font-weight: 600;
+  font-size: 14px;
+  margin: 0 0 4px;
+}
+
+.schedule-detail {
+  color: #8a8782;
+  font-size: 13px;
+  margin: 0;
+}
+
+.delete-btn {
+  background: none;
+  border: 1px solid rgba(224,82,82,0.3);
+  border-radius: 6px;
+  color: #e05252;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.delete-btn:hover {
+  background: rgba(224,82,82,0.1);
+}
+
+@media (max-width: 768px) {
+  .admin-page {
+    padding: 24px 20px;
+  }
+
+  .admin-content {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
