@@ -2,16 +2,16 @@ import './Testimonials.css'
 
 const reviews = [
   {
-    quote: '"Went from a 130 average to consistently breaking 180 in three months. The video review sessions made all the difference."',
-    name: 'Marcus D.',
+    quote: "Rob broke everything down in a way that was easy to understand. My consistency improved within just a few sessions.",
+    name: "Courtney G.",
   },
   {
-    quote: '"Patient, clear, and genuinely invested in helping first-timers like me feel comfortable on the lane."',
-    name: 'Priya S.',
+    quote: '"Went from a 130 average to consistently breaking 180 in three months. The video review sessions made all the difference."',
+    name: 'Matteo R.',
   },
   {
     quote: '"Booking online was effortless and the lessons are worth every dollar. Highly recommend for league bowlers."',
-    name: 'Jordan T.',
+    name: 'Terri H.',
   },
 ]
 

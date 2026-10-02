@@ -13,3 +13,6 @@ __pycache__/
 # Google Calendar API credentials
 backend/credentials.json
 backend/token.json
+
+
+backend/google_token.json

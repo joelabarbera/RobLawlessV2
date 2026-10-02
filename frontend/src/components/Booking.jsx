@@ -3,6 +3,13 @@ import api from '../api.js'
 import { useState, useEffect } from 'react'
 
 const DAYS = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+const PACKAGE_SESSIONS_REQUIRED = 3
+const PACKAGE_PREFIX = 'package:'
+const PACKAGE_OPTIONS = [
+  { lessonType: 'Beginner Fundamentals', price: 195 },
+  { lessonType: 'Performance Coaching', price: 255 },
+  { lessonType: 'Video Game Review', price: 135 },
+]
 
 function getDaysInMonth(year, month) {
   return new Date(year, month + 1, 0).getDate()
@@ -32,29 +39,96 @@ function Booking() {
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [lessonType, setLessonType] = useState('')
+  const [coaches, setCoaches] = useState([])
+  const [selectedCoach, setSelectedCoach] = useState(null)
+  const [packageSessions, setPackageSessions] = useState([])
+  const [packageLessonType, setPackageLessonType] = useState('')
 
   useEffect(() => {
-    if (!selectedDay) return
+    const fetchCoaches = async () => {
+      try {
+        const response = await api.get('/coaches')
+        const list = response.data.coaches || []
+        setCoaches(list)
+        if (list.length > 0) setSelectedCoach(list[0])
+      } catch (error) {
+        console.error('Error fetching coaches', error)
+      }
+    }
+    fetchCoaches()
+  }, [])
+
+  useEffect(() => {
+    if (!selectedDay || !selectedCoach) return
     const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(selectedDay).padStart(2, '0')}`
     const fetchSlots = async () => {
       try {
-        const response = await api.get(`/available_times?date=${dateStr}`)
+        const response = await api.get(`/available_times?date=${dateStr}&coach_id=${selectedCoach.id}`)
         setSlots(response.data.slots || [])
       } catch (error) {
         console.error('Error fetching slots', error)
       }
     }
     fetchSlots()
-  }, [selectedDay, month, year])
+  }, [selectedDay, month, year, selectedCoach])
+
+  const chooseCoach = (coachId) => {
+    const coach = coaches.find(c => c.id === Number(coachId))
+    setSelectedCoach(coach)
+    setSelectedDay(null)
+    setSelectedTime(null)
+    setSlots([])
+  }
+
+  const currentDateStr = () =>
+    `${year}-${String(month + 1).padStart(2, '0')}-${String(selectedDay).padStart(2, '0')}`
 
   const bookLesson = async (e) => {
     e.preventDefault()
+
+    if (lessonType.startsWith(PACKAGE_PREFIX)) {
+      setPackageLessonType(lessonType.slice(PACKAGE_PREFIX.length))
+      setPackageSessions([{ date: currentDateStr(), time: selectedTime }])
+      setSelectedDay(null)
+      setSelectedTime(null)
+      setSlots([])
+      setStep('calendar')
+      return
+    }
+
     try {
-      const date = `${year}-${String(month + 1).padStart(2, '0')}-${String(selectedDay).padStart(2, '0')}`
-      await api.post('/booking', { date, time: selectedTime, name, email, phone, lesson_type: lessonType })
+      await api.post('/booking', { date: currentDateStr(), time: selectedTime, coach_id: selectedCoach.id, name, email, phone, lesson_type: lessonType })
       setStep('confirmed')
     } catch (error) {
       console.error('Error booking lesson', error)
+    }
+  }
+
+  const submitPackage = async (sessions) => {
+    try {
+      await api.post('/packages', { coach_id: selectedCoach.id, lesson_type: packageLessonType, name, email, phone, sessions })
+      setStep('confirmed')
+    } catch (error) {
+      console.error('Error booking package', error)
+    }
+  }
+
+  const confirmCalendarSelection = () => {
+    if (packageSessions.length === 0) {
+      setStep('form')
+      return
+    }
+
+    const updatedSessions = [...packageSessions, { date: currentDateStr(), time: selectedTime }]
+    setSelectedDay(null)
+    setSelectedTime(null)
+    setSlots([])
+
+    if (updatedSessions.length < PACKAGE_SESSIONS_REQUIRED) {
+      setPackageSessions(updatedSessions)
+    } else {
+      setPackageSessions(updatedSessions)
+      submitPackage(updatedSessions)
     }
   }
 
@@ -95,6 +169,33 @@ function Booking() {
               <span>{monthName} {year}</span>
               <button onClick={nextMonth}>&#8250;</button>
             </div>
+            {coaches.length > 1 && packageSessions.length === 0 && (
+              <div className="form-group coach-select-row">
+                <label className="form-label" htmlFor="coach-select">Choose a coach</label>
+                <select
+                  id="coach-select"
+                  className="form-select"
+                  value={selectedCoach?.id || ''}
+                  onChange={e => chooseCoach(e.target.value)}
+                >
+                  {coaches.map(coach => (
+                    <option key={coach.id} value={coach.id}>{coach.name}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+            {packageSessions.length > 0 && (
+              <div className="package-progress">
+                <p className="confirm-label">
+                  {packageLessonType} Package with {selectedCoach?.name} — Session {packageSessions.length + 1} of {PACKAGE_SESSIONS_REQUIRED}
+                </p>
+                <ul className="package-session-list">
+                  {packageSessions.map((s, i) => (
+                    <li key={i}>Session {i + 1}: {s.date} at {formatTime(s.time)}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
             <div className="calendar-grid">
               {DAYS.map((d, i) => (
                 <div className="day-label" key={i}>{d}</div>
@@ -143,7 +244,13 @@ function Booking() {
               <div className="booking-confirm">
                 <p className="confirm-label">Selected</p>
                 <p className="confirm-value">{monthName} {selectedDay}, {year} · {formatTime(selectedTime)}</p>
-                <button className="confirm-btn" onClick={() => setStep('form')}>Continue to Book Now</button>
+                <button className="confirm-btn" onClick={confirmCalendarSelection}>
+                  {packageSessions.length === 0
+                    ? 'Continue to Book Now'
+                    : packageSessions.length + 1 < PACKAGE_SESSIONS_REQUIRED
+                      ? `Confirm Session ${packageSessions.length + 1}`
+                      : 'Confirm Package'}
+                </button>
               </div>
             )}
           </div>
@@ -202,6 +309,13 @@ function Booking() {
                 <option value="Beginner Fundamentals">Beginner Fundamentals — $65 / 60 min</option>
                 <option value="Performance Coaching">Performance Coaching — $85 / 60 min</option>
                 <option value="Video Game Review">Video Game Review — $45 / session</option>
+                <optgroup label="Packages">
+                  {PACKAGE_OPTIONS.map(opt => (
+                    <option key={opt.lessonType} value={`${PACKAGE_PREFIX}${opt.lessonType}`}>
+                      3x {opt.lessonType} — ${opt.price}
+                    </option>
+                  ))}
+                </optgroup>
               </select>
             </div>
             <button type="submit" className="confirm-btn">Confirm Booking</button>
@@ -216,9 +330,22 @@ function Booking() {
         <div className="booking-form-panel booking-confirmed">
           <div className="confirmed-check">✓</div>
           <h3 className="confirmed-title">You're Booked!</h3>
-          <p className="confirm-value">{monthName} {selectedDay}, {year} · {formatTime(selectedTime)}</p>
-          <p className="confirmed-lesson">{lessonType}</p>
-          <p className="confirmed-message">Rob will be in touch shortly to confirm your lesson details.</p>
+          {packageSessions.length === PACKAGE_SESSIONS_REQUIRED ? (
+            <>
+              <p className="confirmed-lesson">{packageLessonType} — 3-Lesson Package</p>
+              <ul className="package-session-list">
+                {packageSessions.map((s, i) => (
+                  <li key={i}>Session {i + 1}: {s.date} at {formatTime(s.time)}</li>
+                ))}
+              </ul>
+            </>
+          ) : (
+            <>
+              <p className="confirm-value">{monthName} {selectedDay}, {year} · {formatTime(selectedTime)}</p>
+              <p className="confirmed-lesson">{lessonType}</p>
+            </>
+          )}
+          <p className="confirmed-message">{selectedCoach?.name || 'Your coach'} will be in touch shortly to confirm your lesson details.</p>
         </div>
       )}
 

@@ -26,6 +26,43 @@
   margin: 0;
 }
 
+/* COACH SELECT */
+.coach-select-row {
+  margin-bottom: 20px;
+}
+
+.coach-select-row .form-select {
+  width: 57%;
+}
+
+/* PACKAGE PROGRESS */
+.package-progress {
+  background: #12151a;
+  border: 1px solid rgba(232,185,63,0.15);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+}
+
+.package-progress .confirm-label {
+  color: #e8b93f;
+  margin: 0 0 8px;
+}
+
+.package-session-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.package-session-list li {
+  color: #c9c6c0;
+  font-size: 13px;
+}
+
 .booking-panel {
   display: grid;
   grid-template-columns: 1.6fr 1fr;

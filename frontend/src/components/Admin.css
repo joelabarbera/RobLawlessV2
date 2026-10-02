@@ -107,11 +107,65 @@
   align-items: start;
 }
 
+/* COACH SWITCHER */
+.coach-switcher {
+  max-width: 940px;
+  margin: 0 auto 20px;
+  display: flex;
+  gap: 8px;
+}
+
+/* CALENDAR CONNECT */
+.calendar-connect {
+  max-width: 940px;
+  margin: 0 auto 32px;
+  background: #1a1e26;
+  border: 1px solid rgba(232,185,63,0.15);
+  border-radius: 14px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.calendar-connect-info .schedule-title {
+  margin-bottom: 2px;
+}
+
+.calendar-connect-info .schedule-detail {
+  color: #e05252;
+}
+
+.calendar-connect-info .schedule-detail.connected {
+  color: #4caf6e;
+}
+
+.calendar-connect-btn {
+  width: auto;
+  padding: 12px 20px;
+  white-space: nowrap;
+}
+
 .admin-card {
   background: #1a1e26;
   border: 1px solid rgba(232,185,63,0.15);
   border-radius: 18px;
   padding: 36px;
+}
+
+.admin-card-wide {
+  grid-column: 1 / -1;
+}
+
+/* BOOKING LIST */
+.booking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 4px;
 }
 
 .admin-card h3 {
